@@ -42,7 +42,7 @@ do
         if [ $UP == 0 ]
         then
             echo "We're up, adding route"
-            gobgp global rib add -a $EXPOSEDIP ipv4 nexthop $LOCALIP
+            gobgp global rib add -a ipv4 $EXPOSEDIP nexthop $LOCALIP
             UP=1
         fi
     else
