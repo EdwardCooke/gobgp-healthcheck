@@ -13,7 +13,8 @@ RUN chown root:root *
 RUN ls
 
 FROM alpine
-RUN adduser -h /app -s /bin/false -S app
+# RUN adduser -h /app -s /bin/false -S app
+
 WORKDIR /app
 
 ENV PATH=/app:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -21,10 +22,7 @@ RUN apk add curl bash jq bind-tools
 
 COPY --from=build /build/* /app
 
-COPY startup.sh .
-COPY configurator.sh .
-COPY healthcheck.sh /config/healthcheck.sh
-COPY initialize.sh /config/initialize.sh
+COPY *.sh .
 
-USER app
+# USER 65534
 ENTRYPOINT [ "./startup.sh" ]
